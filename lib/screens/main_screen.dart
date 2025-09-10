@@ -215,38 +215,38 @@ class _MainScreenState extends State<MainScreen> {
                     SizedBox(
                       width: 10,
                     ),
-                    Container(
-                      width: 105,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF5F5F5),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'src/box.png',
-                            width: 30,
-                            height: 30,
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
-                          Text(
-                            '먹을거',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 13,
+                    GestureDetector(
+                      onTap: _showDialog,
+                      child: Container(
+                        width: 105,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF5F5F5),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'src/box.png',
+                              width: 30,
+                              height: 30,
                             ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          GestureDetector(
-                            onTap: _showDialog,
-                            child: Container(
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              '먹을거',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Container(
                               width: 20,
                               height: 20,
                               decoration: BoxDecoration(
@@ -261,8 +261,8 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
