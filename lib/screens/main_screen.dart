@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 
-//class Todo {
-// todo를 입력받을 클래스 (변수형식) 선언 , 어떻게 쓰는지 잘 모르겠어서 map으로 대체
-// final String title;
-// final String description;
-
-// Todo({required this.title, required this.description});
-//}
-
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -15,17 +7,11 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-//color definition
 int kPrimaryColor = 0xFFF6AD02;
-int kBgColor = 0xFF191919;
-
-//
 
 class _MainScreenState extends State<MainScreen> {
   List<Map<String, dynamic>> todos = [];
-  //textfield에서 입력받는 문자열, 리스트
   String title = "";
-  String description = "";
   String searching = "";
   void toggleTodoCompleted(int index) {
     setState(() {
@@ -56,13 +42,13 @@ class _MainScreenState extends State<MainScreen> {
       builder: (BuildContext context) {
         return Theme(
           data: ThemeData(
-            dialogBackgroundColor: Color(kBgColor),
+            dialogBackgroundColor: Colors.white,
           ),
           child: AlertDialog(
             title: Text(
-              "Add Todo",
+              "투두리스트 추가",
               style: TextStyle(
-                color: Color(kPrimaryColor),
+                color: Colors.black,
               ),
             ),
             content: Column(
@@ -77,65 +63,35 @@ class _MainScreenState extends State<MainScreen> {
                   decoration: InputDecoration(
                     hintText: "Type Title",
                     hintStyle: TextStyle(
-                      color: Color(kPrimaryColor).withOpacity(0.6),
+                      color: Colors.black.withOpacity(0.6),
                     ),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(kPrimaryColor),
+                        color: Colors.black,
                         width: 1.5,
                       ),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(kPrimaryColor).withOpacity(0.6),
+                        color: Colors.black.withOpacity(0.6),
                         width: 1.5,
                       ),
                     ),
                   ),
                   style: TextStyle(
                     // 입력중 text color
-                    color: Color(kPrimaryColor),
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(
                   height: 10,
-                ),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      description = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Type description",
-                    hintStyle: TextStyle(
-                      color: Color(kPrimaryColor).withOpacity(0.6),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(kPrimaryColor),
-                        width: 1.5,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(kPrimaryColor).withOpacity(0.6),
-                        width: 1.5,
-                      ),
-                    ),
-                  ),
-                  style: TextStyle(
-                    // 입력중 text color
-                    color: Color(kPrimaryColor),
-                  ),
                 ),
               ],
             ),
             actions: [
               TextButton(
                 style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all(Color(kPrimaryColor))),
+                    foregroundColor: MaterialStateProperty.all(Colors.black)),
                 child: const Text("Cancel"),
                 onPressed: () {
                   Navigator.pop(context);
@@ -143,8 +99,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Color(kPrimaryColor)),
+                  backgroundColor: MaterialStateProperty.all(Colors.black),
                   foregroundColor: MaterialStateProperty.all(Colors.white),
                 ),
                 child: const Text("Ok"),
@@ -152,7 +107,6 @@ class _MainScreenState extends State<MainScreen> {
                   setState(() {
                     todos.insert(0, {
                       'title': title,
-                      'description': description,
                       'completed': false, // 'completed' 값을 false로 초기화
                     });
                   });
@@ -171,187 +125,185 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(kBgColor),
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(kBgColor),
-          elevation: 0,
-          toolbarHeight: 60,
-          title: Text(
-            'Todo List',
-            style: TextStyle(
-              fontFamily: 'GmarketSansTTF',
-              fontWeight: FontWeight.bold,
-              color: Color(kPrimaryColor),
-              fontSize: 17,
-            ),
-          ),
-          leading: const Icon(
-            Icons.menu_rounded,
-            size: 26.5,
-          ),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(
-                Icons.account_circle_outlined,
-                size: 26.5,
-              ),
-            ),
-          ],
-        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 19),
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
+                SizedBox(height: 45),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      "src/image.png",
+                      width: 30,
+                      height: 30,
+                    ),
+                  ],
+                ),
+                SizedBox(
                   height: 15,
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    //입력 전 디자인
-                    hintText: "Find your Todo",
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Color(kPrimaryColor),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 1,
                     ),
-                    suffixIcon: const Icon(Icons.search),
-                    suffixIconColor: Color(kPrimaryColor),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 1.5,
-                        color: Color(kPrimaryColor),
-                      ),
-                      borderRadius: BorderRadius.circular(18.5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 1.5,
-                        color: Color(kPrimaryColor),
-                      ),
-                      borderRadius: BorderRadius.circular(18.5),
-                    ),
-                  ),
-                  style: TextStyle(
-                    // 입력 중 글자 색
-                    color: Color(kPrimaryColor),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      searching = value;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 7),
-                  child: SizedBox(
-                    height: 60,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'All Todo',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 35,
-                          fontFamily: "GmarketSansTTF",
-                          fontWeight: FontWeight.bold,
+                    Column(
+                      children: [
+                        Container(
+                          width: 45,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Color(0XFFD3D8DB),
+                            shape: BoxShape.circle,
+                          ),
                         ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        Text(
+                          'me',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          width: 45,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Color(0XFFD3D8DB),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        Text(
+                          'you',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Image.asset(
+                  "src/image1.png",
+                  width: 322,
+                  height: 260,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      width: 105,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF5F5F5),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'src/box.png',
+                            width: 30,
+                            height: 30,
+                          ),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            '먹을거',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 13,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          GestureDetector(
+                            onTap: _showDialog,
+                            child: Container(
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: 15,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 4,
                 ),
                 Expanded(
                   child: ListView.builder(
+                    padding: EdgeInsets.zero,
                     itemCount: todos.length,
                     itemBuilder: (BuildContext context, int index) {
                       final todo = todos[index];
                       final bool isCompleted =
                           todo['completed'] ?? false; //할 일이 완료되었는지 여부
-                      if (title.isNotEmpty &&
-                          !todo['title']
-                              .toLowerCase()
-                              .contains(searching.toLowerCase())) {
-                        return const SizedBox.shrink(); // 검색어가 포함되지 않은 항목 숨기기
-                      }
-                      return Dismissible(
-                        key: Key(todo['title']),
-                        direction: DismissDirection.startToEnd, // 오른쪽으로 밀때
-                        onDismissed: (direction) {
-                          // 삭제하기
-                          if (direction == DismissDirection.startToEnd) {
-                            removeTodoItem(index);
-                          }
-                        },
-                        background: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), // 뒷배경 둥글게
-                            color: Colors.red,
-                          ),
-                          alignment: Alignment.centerRight, // 아이콘을 오른쪽 가운데
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20), //아이콘 PADDING
-                          child: const Icon(Icons.delete_outline_rounded,
-                              color: Colors.white),
-                        ),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // 원하는 라운드 모서리 반지름 값 설정
-                            side: BorderSide(
-                              color: isCompleted
-                                  ? const Color(0xFFF7C34C)
-                                  : Color(kPrimaryColor),
-                              width: 2,
-                            ), // 원하는 모서리 색상 및 두께 설정
-                          ),
-                          color: Color(kBgColor),
-                          child: ListTile(
-                            leading: IconButton(
-                              icon: Icon(
-                                color: isCompleted ? Colors.grey : Colors.white,
-                                isCompleted
-                                    ? Icons.check_box_outlined
-                                    : Icons.check_box_outline_blank_rounded,
-                                size: 35,
-                              ),
-                              onPressed: () => toggleTodoCompleted(index),
+                      return SizedBox(
+                        height: 40,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
                             ),
-                            title: Text(
+                            GestureDetector(
+                              child: Image.asset(
+                                isCompleted ? "src/yet.png" : "src/nonyet.png",
+                                width: 35,
+                                height: 35,
+                              ),
+                              onTap: () => toggleTodoCompleted(index),
+                            ),
+                            SizedBox(width: 5),
+                            Text(
                               todo['title'] ?? '',
                               style: TextStyle(
-                                color: isCompleted ? Colors.grey : Colors.white,
+                                color: isCompleted ? Colors.grey : Colors.black,
                                 decoration: isCompleted
                                     ? TextDecoration.lineThrough
                                     : null,
                               ),
-                            ), // ?? '' 는 문자열이 null일 경우를 방지해 빈 문자열로 대체
-                            subtitle: Text(
-                              todo['description'] ?? '',
-                              style: TextStyle(
-                                color: isCompleted
-                                    ? Colors.grey
-                                    : Colors.grey[300],
-                                decoration: isCompleted
-                                    ? TextDecoration.lineThrough
-                                    : null,
-                              ),
-                            ), // ?? ''
-                            trailing: IconButton(
-                              icon: Icon(
-                                Icons.delete_outline_rounded,
-                                color: isCompleted ? Colors.grey : Colors.white,
-                              ),
-                              onPressed: () => removeTodoItem(index),
                             ),
-                          ),
+                          ],
                         ),
                       );
                     },
@@ -359,22 +311,6 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ],
             ),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: Container(
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Color(kPrimaryColor),
-                width: 2,
-              )),
-          child: FloatingActionButton(
-            backgroundColor: Color(kBgColor),
-            foregroundColor: Color(kPrimaryColor),
-            elevation: 20,
-            onPressed: _showDialog,
-            child: const Icon(Icons.add),
           ),
         ),
       ),
